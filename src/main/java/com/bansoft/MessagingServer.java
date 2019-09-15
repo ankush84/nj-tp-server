@@ -6,11 +6,14 @@ import org.eclipse.jetty.servlet.ServletContextHandler;
 public class MessagingServer {
     
     private Server server;
-    
+    private int port;
+    public MessagingServer(int port) {
+     this.port=port;   
+    }
     public void setup() {
         server = new Server();
         ServerConnector connector = new ServerConnector(server);
-        connector.setPort(9080);
+        connector.setPort(port);
         server.addConnector(connector);
         
         ServletContextHandler handler = new ServletContextHandler(ServletContextHandler.SESSIONS);

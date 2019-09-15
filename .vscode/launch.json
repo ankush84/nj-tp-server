@@ -9,8 +9,8 @@
             "name": "CodeLens (Launch) - Main",
             "request": "launch",
             "mainClass": "com.bansoft.Main",
-            "projectName": "njtpserver"
-        },
+            //"projectName": "njtpserver"
+        }
         
         // {
         //     "type": "java",

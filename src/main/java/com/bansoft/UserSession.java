@@ -5,7 +5,7 @@ package com.bansoft;
  *
  */
 public interface UserSession {
-    void receiveText(String text) throws Exception;
+    void sendStringToRemote(String text);
     void setCurrentUser(User user);
     void disconnect(int status, String reason);
 }

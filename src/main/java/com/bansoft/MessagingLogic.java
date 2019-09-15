@@ -25,8 +25,14 @@ public class MessagingLogic {
     
     public void receiveText(UserSession session, String text) {
         try {
-            receiveData(session, gson.fromJson(text, Data.class));
+            Data data = gson.fromJson(text, Data.class);
+            if(data!=null){
+            receiveData(session,data );
+            }else{
+            session.sendStringToRemote("text can't be parsed as valid json");                
+            }
         } catch (Throwable t) {
+            session.sendStringToRemote(t.getMessage());
         }
     }
     
@@ -65,12 +71,7 @@ public class MessagingLogic {
             Data data = new Data();
             data.operation = Data.AUTHENTICATION_LOGIN;
             data.session = Repository.getInstance().DUMMY_SESSION;
-            
-            try {
-                session.receiveText(gson.toJson(data));
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
+            session.sendStringToRemote(gson.toJson(data));
             
         } else {
             session.disconnect(401, "Wrong username or password!");
@@ -85,12 +86,7 @@ public class MessagingLogic {
         if (isUserOnline(message.to)) {
             System.out.println("User is online, try to send message");
             UserSession userSession = userSessions.get(message.to);
-            try {
-                userSession.receiveText(gson.toJson(message));
-            } catch (Exception ex) {
-                // put to offline message
-                System.out.println("User is offline");
-            }
+            userSession.sendStringToRemote(gson.toJson(message));            
         } else {
             // todo put to offline message
             System.out.println("User is offline");
