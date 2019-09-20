@@ -30,4 +30,14 @@ public class PurchaseConverter {
         return builder.build();
     }
 
+    public static PurchaseSupply fromPurchaseModelToSupply(IPurchase model) {
+        PurchaseSupply ps = new PurchaseSupply();
+        ps.billingId=model.getBillingId();
+        ps.details= model.getDetails();
+        ps.price= model.getPrice();
+        ps.productName = model.getProductName();
+        ps.qty = model.getQty();
+        ps.timestamp = model.getTimestamp().toEpochMilli();
+        return ps;
+    }
 }

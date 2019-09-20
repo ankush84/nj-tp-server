@@ -24,26 +24,26 @@ public class SubscrptionListener implements ISubscriptionListener{
     }
 
     @Override
-    public void supplyAdd(String supply) {        
+    public void supplyAdd(Object supply) {        
         SupplyMessage supplyMessage = new SupplyMessage();
         supplyMessage.phase = SupplyMessage.ADD;
-        supplyMessage.supply = supply;
+        supplyMessage.supply = gson.toJson(supply);
         send(supplyMessage);      
     }   
 
     @Override
-    public void supplyUpdate(String supply) {
+    public void supplyUpdate(Object supply) {
         SupplyMessage supplyMessage = new SupplyMessage();
         supplyMessage.phase = SupplyMessage.UPDATE;
-        supplyMessage.supply = supply;
+        supplyMessage.supply = gson.toJson(supply);
         send(supplyMessage);
     }
 
     @Override
-    public void supplyRemove(String supply) {
+    public void supplyRemove(Object supply) {
         SupplyMessage supplyMessage = new SupplyMessage();
         supplyMessage.phase = SupplyMessage.DELETE;
-        supplyMessage.supply = supply;
+        supplyMessage.supply = gson.toJson(supply);
         send(supplyMessage);
     }
 

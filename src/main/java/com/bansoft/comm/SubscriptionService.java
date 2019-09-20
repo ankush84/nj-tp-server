@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 public class SubscriptionService {
 
-    private HashMap<String, HashMap<String, ISubscriptionListener>> topicToListenerMap;
+    private HashMap<String, Topic> topicsMap;
 
     private static class BillPughSingleton {
         private static final SubscriptionService INSTANCE = new SubscriptionService();
@@ -16,81 +16,33 @@ public class SubscriptionService {
     }
 
     private SubscriptionService() {
-        topicToListenerMap = new HashMap<>();
+        topicsMap = new HashMap<>();
+    }
+
+    public void registerTopic(Topic topic) {
+        if (!topicsMap.containsKey(topic.getName())) {
+            topicsMap.put(topic.getName(),topic);
+        }
     }
 
     public void addSubscription(String topic, MessagingAdapter messagingAdapter) {
-        if (topicToListenerMap.containsKey(topic)) {
-            if (!topicToListenerMap.get(topic).containsKey(messagingAdapter.getSessionId())) {
-                topicToListenerMap.get(topic).put(messagingAdapter.getSessionId(),
-                        new SubscrptionListener(messagingAdapter));
-            }
-        } else {
-            HashMap<String, ISubscriptionListener> listeners = new HashMap<String, ISubscriptionListener>();
-            topicToListenerMap.put(topic, listeners);
-            listeners.put(messagingAdapter.getSessionId(), new SubscrptionListener(messagingAdapter));
+        if (topicsMap.containsKey(topic)) {
+            topicsMap.get(topic).addSubscription(messagingAdapter);
         }
     }
 
     public void removeSubscription(String topic, MessagingAdapter messagingAdapter) {
-        if (topicToListenerMap.containsKey(topic)) {
-            if (topicToListenerMap.get(topic).containsKey(messagingAdapter.getSessionId())) {
-                topicToListenerMap.get(topic).remove(messagingAdapter.getSessionId());
-            }
+        if (topicsMap.containsKey(topic)) {
+            topicsMap.get(topic).removeSubscription(messagingAdapter);
         }
     }
 
     public void removeAllSubscription(MessagingAdapter messagingAdapter) {
-        for (String topic : topicToListenerMap.keySet()) {
+        for (String topic : topicsMap.keySet()) {
             removeSubscription(topic, messagingAdapter);
         }
     }
 
-    public void supplyBegin(String topic) {
-        if (topicToListenerMap.containsKey(topic)) {
-            HashMap<String, ISubscriptionListener> listeners = topicToListenerMap.get(topic);
-            for (ISubscriptionListener listener : listeners.values()) {
-                listener.supplyBegin();
-            }
-        }
-    }
-
-    public void supplyAdd(String topic, String supply) {
-        if (topicToListenerMap.containsKey(topic)) {
-            HashMap<String, ISubscriptionListener> listeners = topicToListenerMap.get(topic);
-            for (ISubscriptionListener listener : listeners.values()) {
-                listener.supplyBegin();
-                listener.supplyAdd(supply);
-                listener.supplyEnd();
-            }
-        }
-    }
-
-    public void supplyUpdate(String topic, String supply) {
-        if (topicToListenerMap.containsKey(topic)) {
-            HashMap<String, ISubscriptionListener> listeners = topicToListenerMap.get(topic);
-            for (ISubscriptionListener listener : listeners.values()) {
-                listener.supplyUpdate(supply);
-            }
-        }
-    }
-
-    public void supplyRemove(String topic, String supply) {
-        if (topicToListenerMap.containsKey(topic)) {
-            HashMap<String, ISubscriptionListener> listeners = topicToListenerMap.get(topic);
-            for (ISubscriptionListener listener : listeners.values()) {
-                listener.supplyRemove(supply);
-            }
-        }
-    }
-
-    public void supplyEnd(String topic) {
-        if (topicToListenerMap.containsKey(topic)) {
-            HashMap<String, ISubscriptionListener> listeners = topicToListenerMap.get(topic);
-            for (ISubscriptionListener listener : listeners.values()) {
-                listener.supplyEnd();
-            }
-        }
-    }
+    
 
 }
