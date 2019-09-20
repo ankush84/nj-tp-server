@@ -1,5 +1,8 @@
-package com.bansoft;
+package com.bansoft.comm;
+
 import java.util.HashMap;
+
+import com.bansoft.comm.payload.User;
 /**
  * Repository responsible for all operation related to data saving or retrieval.
  *
