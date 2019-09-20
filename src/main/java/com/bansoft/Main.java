@@ -1,9 +1,7 @@
 package com.bansoft;
 
-import com.bansoft.Purchase.PurchaseTopic;
+import com.bansoft.Purchase.PurchaseService;
 import com.bansoft.dal.hibernate.HibernateService;
-
-import org.hibernate.Hibernate;
 
 public class Main {
 	public static void main(String[] args) throws Exception {
@@ -12,7 +10,8 @@ public class Main {
 		theServer.setup();
 		
 		HibernateService hibernateService = new HibernateService();
-		PurchaseTopic purchaseTopic = new PurchaseTopic(hibernateService);
+        new PurchaseService(hibernateService);
+
         theServer.start();
 	}
 }

@@ -11,10 +11,13 @@ public class PurchaseService implements IPurchaseService {
 
     private HashMap<Long, IPurchase> cache;
     private PurchaseDao dao;
+    private PurchaseTopic purchaseTopic;
 
     public PurchaseService(HibernateService hibernateService) {
         this.cache = new HashMap<>();
         this.dao = new PurchaseDao(hibernateService);
+		purchaseTopic = new PurchaseTopic(this);
+        
         this.init();
     }
 

@@ -18,6 +18,6 @@ public class PurchaseDao {
         this.hibernateService.save(student);
     }
     public List<PurchaseEntity> loadAll() {
-        return this.hibernateService.getAll(PurchaseEntity.class, "Purchase");        
+        return this.hibernateService.getAll(PurchaseEntity.class, "PurchaseEntity");        
     }
 }

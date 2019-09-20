@@ -60,6 +60,13 @@
             <version>5.4.5.Final</version>
         </dependency>
 
+<dependency>
+    <groupId>com.sample</groupId>
+    <artifactId>sample</artifactId>
+    <version>1.0</version>
+    <scope>system</scope>
+    <systemPath>C:\\Program Files (x86)\\MySQL\\Connector J 8.0\\mysql-connector-java-8.0.17.jar</systemPath>
+</dependency>
 	</dependencies>
 
 

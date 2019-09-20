@@ -1,12 +1,35 @@
 package com.bansoft.dal.hibernate.entities;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="Purchase")
 public class PurchaseEntity {
+
+    @Id
+    @GeneratedValue
     private Long id;
-    private String productName;
+    
+    @Column
+    String productName;
+    
+    @Column    
     private Double price;
+
+    @Column        
     private Double qty;
+    
+    @Column    
     private String details;
+
+    @Column    
     private String billingId;
+
+    @Column    
     private long timestamp;
 
     public PurchaseEntity() {
