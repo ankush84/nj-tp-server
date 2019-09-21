@@ -2,7 +2,10 @@ package com.bansoft.Purchase;
 
 import java.time.Instant;
 
-import com.bansoft.dal.hibernate.entities.PurchaseEntity;
+import com.bansoft.Purchase.comm.PurchaseSupply;
+import com.bansoft.Purchase.dal.PurchaseEntity;
+import com.bansoft.Purchase.model.IPurchase;
+import com.bansoft.Purchase.model.PurchaseBuilder;
 
 public class PurchaseConverter {
 

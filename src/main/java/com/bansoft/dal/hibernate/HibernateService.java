@@ -3,7 +3,7 @@ package com.bansoft.dal.hibernate;
 import java.util.List;
 import java.util.Properties;
 
-import com.bansoft.dal.hibernate.entities.PurchaseEntity;
+import com.bansoft.Purchase.dal.PurchaseEntity;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -16,6 +16,10 @@ public class HibernateService {
     private SessionFactory sessionFactory;
     
     public HibernateService() {
+        init();
+    }
+
+    public void init(){
         getSessionFactory();
     }
 

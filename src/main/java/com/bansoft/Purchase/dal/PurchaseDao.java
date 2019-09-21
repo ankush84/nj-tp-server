@@ -1,10 +1,9 @@
 
-package com.bansoft.dal.hibernate.dao;
+package com.bansoft.Purchase.dal;
 
 import java.util.List;
 
 import com.bansoft.dal.hibernate.HibernateService;
-import com.bansoft.dal.hibernate.entities.PurchaseEntity;
 
 public class PurchaseDao {
 

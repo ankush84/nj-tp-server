@@ -1,4 +1,4 @@
-package com.bansoft.dal.hibernate.entities;
+package com.bansoft.Purchase.dal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

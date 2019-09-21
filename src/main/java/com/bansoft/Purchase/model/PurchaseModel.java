@@ -1,4 +1,4 @@
-package com.bansoft.Purchase;
+package com.bansoft.Purchase.model;
 
 import java.time.Instant;
 

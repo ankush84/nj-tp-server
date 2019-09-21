@@ -1,5 +1,8 @@
 package com.bansoft.Purchase;
 
+import com.bansoft.Purchase.model.IPurchase;
+import com.bansoft.Purchase.model.IPurchaseBuilder;
+
 public interface IPurchaseService {
     public IPurchaseBuilder newPurchase();
 
