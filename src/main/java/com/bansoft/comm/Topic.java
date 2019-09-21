@@ -21,7 +21,7 @@ public abstract class Topic {
     public void addSubscription(MessagingAdapter messagingAdapter) {
         if (!listenersMap.containsKey(messagingAdapter.getSessionId())) {
             listenersMap.put(messagingAdapter.getSessionId(),
-                    new SubscrptionListener(messagingAdapter));
+                    new SupplyListener(messagingAdapter));
             supplyCurrentCache(messagingAdapter);
         }
     }

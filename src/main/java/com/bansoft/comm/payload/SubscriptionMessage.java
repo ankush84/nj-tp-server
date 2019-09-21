@@ -5,6 +5,6 @@ package com.bansoft.comm.payload;
  *
  */
 public class SubscriptionMessage {
-    public String type;
+    public String topic;
    //Todo : add support for limited fields subscription
 }

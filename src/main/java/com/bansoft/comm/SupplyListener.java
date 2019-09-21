@@ -5,12 +5,12 @@ import com.bansoft.comm.payload.Data;
 import com.bansoft.comm.payload.SupplyMessage;
 import com.google.gson.Gson;
 
-public class SubscrptionListener implements ISubscriptionListener{
+public class SupplyListener implements ISubscriptionListener{
 
     private MessagingAdapter messagingAdapter;
     private Gson gson;
 
-    public SubscrptionListener(MessagingAdapter messagingAdapter) {
+    public SupplyListener(MessagingAdapter messagingAdapter) {
 
         this.messagingAdapter = messagingAdapter;
         this.gson = messagingAdapter.getGson();

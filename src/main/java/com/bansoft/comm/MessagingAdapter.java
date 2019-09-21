@@ -2,6 +2,8 @@
 package com.bansoft.comm;
 
 import com.bansoft.comm.payload.Data;
+import com.bansoft.comm.payload.RequestMessage;
+import com.bansoft.comm.payload.SubscriptionMessage;
 import com.google.gson.Gson;
 
 import org.eclipse.jetty.websocket.api.WebSocketAdapter;
@@ -33,7 +35,17 @@ public class MessagingAdapter extends WebSocketAdapter {
                     logOut(data);
                     break;
                 case Data.OPERATION_SUBSCRIBE:
-                //send(data.message);
+                    if (!isValidSession(data.sessionId))
+                        break;
+
+                    SubscriptionMessage sm = gson.fromJson(data.message, SubscriptionMessage.class);
+                    SubscriptionService.getInstance().addSubscription(sm.topic, this);
+                    break;
+                case Data.OPERATION_REQUEST:
+                if (!isValidSession(data.sessionId))
+                    break;
+                RequestMessage rm = gson.fromJson(data.message, RequestMessage.class);
+                RequestService.getInstance().getReply(this, rm);
                 break;
                 default:
                     getSession().close(404, "Wrong operation");
@@ -64,11 +76,11 @@ public class MessagingAdapter extends WebSocketAdapter {
         }
     }
 
-    public String getSessionId(){
+    public String getSessionId() {
         return data.sessionId;
     }
 
-    public Gson getGson(){
+    public Gson getGson() {
         return gson;
     }
 
@@ -100,7 +112,7 @@ public class MessagingAdapter extends WebSocketAdapter {
         Sessions.getInstance().remove(data.sessionId);
     }
 
-    // private boolean validateSession(String sessionId) {
-    // return Sessions.getInstance().isValid(sessionId);
-    // }
+    private boolean isValidSession(String sessionId) {
+        return data.sessionId.equals(sessionId) && Sessions.getInstance().isValid(sessionId);
+    }
 }
