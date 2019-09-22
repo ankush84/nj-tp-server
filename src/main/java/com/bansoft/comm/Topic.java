@@ -38,7 +38,7 @@ public abstract class Topic {
         }
     }
 
-    protected void supplyAdd(Object supply) {
+    public void supplyAdd(Object supply) {
         for (ISubscriptionListener listener : listenersMap.values()) {
             listener.supplyAdd(supply);
         }

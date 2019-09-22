@@ -12,6 +12,7 @@ public class Data {
     public static final int OPERATION_SUBSCRIBE = 100;        
     public static final int OPERATION_SUPPLY = 200;        
     public static final int OPERATION_REQUEST = 300;        
+    public static final int OPERATION_REPLY = 400;        
     
     public int protocolversion = VERSION;
     public int operation;

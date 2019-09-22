@@ -22,7 +22,7 @@ public abstract class Request {
 
     public void getReply(MessagingAdapter messagingAdapter, RequestMessage requestMessage) {
         Data data = new Data();
-        data.operation = Data.OPERATION_SUPPLY;
+        data.operation = Data.OPERATION_REPLY;
         data.sessionId = messagingAdapter.getSessionId();
         HashMap<String, Object> argMap = new HashMap<>();
         for (int i = 0; i < requestMessage.argNames.length; i++) {

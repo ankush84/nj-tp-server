@@ -5,12 +5,8 @@ import java.time.Instant;
 import java.util.HashMap;
 
 import com.bansoft.Purchase.IPurchaseService;
-import com.bansoft.Purchase.PurchaseConverter;
-import com.bansoft.Purchase.model.IPurchase;
 import com.bansoft.Purchase.model.IPurchaseBuilder;
-import com.bansoft.comm.MessagingAdapter;
 import com.bansoft.comm.Request;
-import com.bansoft.comm.Topic;
 import com.bansoft.comm.payload.ReplyMessage;
 
 public class AddPurchaseRequest extends Request {

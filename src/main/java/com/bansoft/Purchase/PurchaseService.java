@@ -3,6 +3,7 @@ package com.bansoft.Purchase;
 import java.util.HashMap;
 import java.util.List;
 
+import com.bansoft.Purchase.comm.AddPurchaseRequest;
 import com.bansoft.Purchase.comm.PurchaseTopic;
 import com.bansoft.Purchase.dal.PurchaseDao;
 import com.bansoft.Purchase.dal.PurchaseEntity;
@@ -21,7 +22,7 @@ public class PurchaseService implements IPurchaseService {
         this.cache = new HashMap<>();
         this.dao = new PurchaseDao(hibernateService);
 		purchaseTopic = new PurchaseTopic(this);
-        
+        new AddPurchaseRequest(this);
         this.init();
     }
 
@@ -43,7 +44,7 @@ public class PurchaseService implements IPurchaseService {
         dao.save(pe);        
         purchase.setId(pe.getId());
         cache.put(pe.getId(), purchase);
-        //todo: raise event
+        this.purchaseTopic.supplyAdd(purchase);
     }
 
     @Override
