@@ -6,7 +6,9 @@ package com.bansoft.comm.payload;
 public class Data {
     public static final int VERSION = 1;    
     public static final int OPERATION_LOGIN = 1;    
-    public static final int OPERATION_LOGOUT = 2;        
+    public static final int OPERATION_LOGIN_RESULT = 2;    
+    public static final int OPERATION_LOGOUT = 3;        
+    public static final int OPERATION_LOGOUT_RESULT = 4;        
     public static final int OPERATION_SUBSCRIBE = 100;        
     public static final int OPERATION_SUPPLY = 200;        
     public static final int OPERATION_REQUEST = 300;        
