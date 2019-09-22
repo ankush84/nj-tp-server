@@ -9,10 +9,12 @@ public class SupplyListener implements ISubscriptionListener{
 
     private MessagingAdapter messagingAdapter;
     private Gson gson;
+    private String topic;
 
-    public SupplyListener(MessagingAdapter messagingAdapter) {
+    public SupplyListener(MessagingAdapter messagingAdapter, String topic) {
 
         this.messagingAdapter = messagingAdapter;
+        this.topic = topic;
         this.gson = messagingAdapter.getGson();
     }
 
@@ -55,6 +57,7 @@ public class SupplyListener implements ISubscriptionListener{
     }
 
     private void send(SupplyMessage supplyMessage) {
+        supplyMessage.topic=this.topic;
         Data data= new Data();
         data.operation = Data.OPERATION_SUPPLY;
         data.sessionId=messagingAdapter.getSessionId();

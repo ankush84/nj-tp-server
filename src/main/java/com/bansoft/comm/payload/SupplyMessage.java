@@ -14,6 +14,7 @@ public class SupplyMessage {
 
     public int phase;
     public String supply;
+    public String topic;
 
    //Todo : add support for limited fields subscription
 }

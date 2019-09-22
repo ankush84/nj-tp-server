@@ -99,7 +99,12 @@ public class MessagingAdapter extends WebSocketAdapter {
             replyData.sessionId = sessionId;
             sendStringToRemote(gson.toJson(replyData));
         } else {
-            getSession().close(401, "Wrong username or password!");
+            Data replyData = new Data();
+            replyData.operation = Data.OPERATION_LOGIN_RESULT;
+            replyData.user = data.user;
+            replyData.message="Login failed";
+            sendStringToRemote(gson.toJson(replyData));
+
         }
     }
 
