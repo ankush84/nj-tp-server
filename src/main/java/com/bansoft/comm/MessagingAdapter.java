@@ -16,7 +16,7 @@ import org.eclipse.jetty.websocket.api.WebSocketAdapter;
  */
 public class MessagingAdapter extends WebSocketAdapter {
 
-    private Data data;
+    private Data loginData;
     private Gson gson = new Gson();
 
     @Override
@@ -42,11 +42,11 @@ public class MessagingAdapter extends WebSocketAdapter {
                     SubscriptionService.getInstance().addSubscription(sm.topic, this);
                     break;
                 case Data.OPERATION_REQUEST:
-                if (!isValidSession(data.sessionId))
+                    if (!isValidSession(data.sessionId))
+                        break;
+                    RequestMessage rm = gson.fromJson(data.message, RequestMessage.class);
+                    RequestService.getInstance().getReply(this, rm);
                     break;
-                RequestMessage rm = gson.fromJson(data.message, RequestMessage.class);
-                RequestService.getInstance().getReply(this, rm);
-                break;
                 default:
                     getSession().close(404, "Wrong operation");
                 }
@@ -58,7 +58,7 @@ public class MessagingAdapter extends WebSocketAdapter {
 
     @Override
     public void onWebSocketClose(int statusCode, String reason) {
-        logOut(data);
+        logOut(loginData);
         System.err.println("Close connection " + statusCode + ", " + reason);
         super.onWebSocketClose(statusCode, reason);
     }
@@ -76,10 +76,6 @@ public class MessagingAdapter extends WebSocketAdapter {
         }
     }
 
-    public String getSessionId() {
-        return data.sessionId;
-    }
-
     public Gson getGson() {
         return gson;
     }
@@ -90,19 +86,19 @@ public class MessagingAdapter extends WebSocketAdapter {
         }
 
         if (Repository.getInstance().isValid(data.user)) {
-            String sessionId = Sessions.getInstance().add(this);
-            this.data = data;
+            this.loginData = data;
+            this.loginData.sessionId = Sessions.getInstance().add(this);
 
             Data replyData = new Data();
             replyData.operation = Data.OPERATION_LOGIN_RESULT;
             replyData.user = data.user;
-            replyData.sessionId = sessionId;
+            replyData.sessionId = this.loginData.sessionId;
             sendStringToRemote(gson.toJson(replyData));
         } else {
             Data replyData = new Data();
             replyData.operation = Data.OPERATION_LOGIN_RESULT;
             replyData.user = data.user;
-            replyData.message="Login failed";
+            replyData.message = "Login failed";
             sendStringToRemote(gson.toJson(replyData));
 
         }
@@ -118,6 +114,13 @@ public class MessagingAdapter extends WebSocketAdapter {
     }
 
     private boolean isValidSession(String sessionId) {
-        return data.sessionId.equals(sessionId) && Sessions.getInstance().isValid(sessionId);
+        return loginData.sessionId.equals(sessionId) && Sessions.getInstance().isValid(sessionId);
+    }
+
+    public String getSessionId() {
+        if (loginData == null)
+            return null;
+
+        return this.loginData.sessionId;
     }
 }

@@ -10,6 +10,12 @@
             "request": "launch",
             "mainClass": "com.bansoft.Main",
             //"projectName": "njtpserver"
+            "classPaths": [
+                "${workspaceFolder}/target/*",
+                "${workspaceFolder}/target/lib/*",
+                "C:/Program Files (x86)/MySQL/Connector J 8.0/*",                
+            ]
+
         }
         
         // {

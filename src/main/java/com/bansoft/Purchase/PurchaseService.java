@@ -44,7 +44,7 @@ public class PurchaseService implements IPurchaseService {
         dao.save(pe);        
         purchase.setId(pe.getId());
         cache.put(pe.getId(), purchase);
-        this.purchaseTopic.supplyAdd(purchase);
+        this.purchaseTopic.supplyAdd(PurchaseConverter.fromPurchaseModelToSupply(purchase));
     }
 
     @Override

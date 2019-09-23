@@ -5,7 +5,7 @@ import com.bansoft.comm.payload.Data;
 import com.bansoft.comm.payload.SupplyMessage;
 import com.google.gson.Gson;
 
-public class SupplyListener implements ISubscriptionListener{
+public class SupplyListener implements ISubscriptionListener {
 
     private MessagingAdapter messagingAdapter;
     private Gson gson;
@@ -19,19 +19,20 @@ public class SupplyListener implements ISubscriptionListener{
     }
 
     @Override
-    public void supplyBegin() {       
+    public void supplyBegin() {
         SupplyMessage supplyMessage = new SupplyMessage();
         supplyMessage.phase = SupplyMessage.BATCH_BEGIN;
         send(supplyMessage);
     }
 
     @Override
-    public void supplyAdd(Object supply) {        
+    public void supplyAdd(Object supply) {
         SupplyMessage supplyMessage = new SupplyMessage();
         supplyMessage.phase = SupplyMessage.ADD;
         supplyMessage.supply = gson.toJson(supply);
-        send(supplyMessage);      
-    }   
+
+        send(supplyMessage);
+    }
 
     @Override
     public void supplyUpdate(Object supply) {
@@ -50,18 +51,18 @@ public class SupplyListener implements ISubscriptionListener{
     }
 
     @Override
-    public void supplyEnd() {        
+    public void supplyEnd() {
         SupplyMessage supplyMessage = new SupplyMessage();
         supplyMessage.phase = SupplyMessage.BATCH_END;
         send(supplyMessage);
     }
 
     private void send(SupplyMessage supplyMessage) {
-        supplyMessage.topic=this.topic;
-        Data data= new Data();
+        supplyMessage.topic = this.topic;
+        Data data = new Data();
         data.operation = Data.OPERATION_SUPPLY;
-        data.sessionId=messagingAdapter.getSessionId();
-        data.message= gson.toJson(supplyMessage);
-        messagingAdapter.sendStringToRemote(gson.toJson(data));        
+        data.sessionId = messagingAdapter.getSessionId();
+        data.message = gson.toJson(supplyMessage);
+        messagingAdapter.sendStringToRemote(gson.toJson(data));
     }
 }
