@@ -10,6 +10,7 @@ public class Data {
     public static final int OPERATION_LOGOUT = 3;        
     public static final int OPERATION_LOGOUT_RESULT = 4;        
     public static final int OPERATION_SUBSCRIBE = 100;        
+    public static final int OPERATION_UNSUBSCRIBE = 101;        
     public static final int OPERATION_SUPPLY = 200;        
     public static final int OPERATION_REQUEST = 300;        
     public static final int OPERATION_REPLY = 400;        

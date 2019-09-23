@@ -41,6 +41,13 @@ public class MessagingAdapter extends WebSocketAdapter {
                     SubscriptionMessage sm = gson.fromJson(data.message, SubscriptionMessage.class);
                     SubscriptionService.getInstance().addSubscription(sm.topic, this);
                     break;
+                    case Data.OPERATION_UNSUBSCRIBE:
+                    if (!isValidSession(data.sessionId))
+                        break;
+
+                    SubscriptionMessage unsm = gson.fromJson(data.message, SubscriptionMessage.class);
+                    SubscriptionService.getInstance().removeSubscription(unsm.topic, this);
+                    break;
                 case Data.OPERATION_REQUEST:
                     if (!isValidSession(data.sessionId))
                         break;
