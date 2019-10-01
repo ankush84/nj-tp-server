@@ -1,6 +1,7 @@
 package com.bansoft;
 
 import com.bansoft.Purchase.PurchaseService;
+import com.bansoft.Stock.StockService;
 import com.bansoft.dal.hibernate.HibernateService;
 
 public class Main {
@@ -8,10 +9,11 @@ public class Main {
 		System.out.println("Hello, world!");
 		MessagingServer theServer = new MessagingServer(9080);
 		theServer.setup();
-		
-		HibernateService hibernateService = new HibernateService();
-        new PurchaseService(hibernateService);
 
-        theServer.start();
+		HibernateService hibernateService = new HibernateService();
+		StockService stockService = new StockService(hibernateService);
+		new PurchaseService(hibernateService, stockService);
+
+		theServer.start();
 	}
 }
