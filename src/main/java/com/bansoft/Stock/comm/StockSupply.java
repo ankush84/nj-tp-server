@@ -6,4 +6,5 @@ public class StockSupply {
      //public Double price; //duplicate should come from purchase?
      public Double qty;     //duplicate should come from purchase?
      public long timestamp; //availablesince this time
+	public String productName;
 }

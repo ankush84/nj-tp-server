@@ -12,6 +12,7 @@ public class StockConverter {
     public static StockEntity fromStockModelToEntity(IStock model) {
         StockEntity entity = new StockEntity();
         entity.setId(model.getId());
+        entity.setProductName(model.getProductName());
         entity.setPurchaseId(model.getPurchaseId());
         entity.setQty(model.getQty());
         entity.setTimestamp(model.getTimestamp().toEpochMilli());
@@ -21,6 +22,7 @@ public class StockConverter {
     public static IStock fromStockEntityToModel(StockEntity entity) {
         StockBuilder builder = new StockBuilder();
         builder.Id(entity.getId());
+        builder.productName(entity.getProductName());
         builder.purchaseId(entity.getPurchaseId());
         builder.qty(entity.getQty());
         builder.timestamp(Instant.ofEpochMilli(entity.getTimestamp()));
@@ -31,6 +33,7 @@ public class StockConverter {
     public static StockSupply fromStockModelToSupply(IStock model) {
         StockSupply supply = new StockSupply();
         supply.id = model.getId();
+        supply.productName = model.getProductName();
         supply.purchaseId = model.getPurchaseId();
         supply.qty = model.getQty();
         supply.timestamp = model.getTimestamp().toEpochMilli();
