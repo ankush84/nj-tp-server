@@ -2,10 +2,11 @@ package com.bansoft.dal.hibernate;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 
+import com.bansoft.Production.dal.ProductionEntity;
 import com.bansoft.Purchase.dal.PurchaseEntity;
+import com.bansoft.Stock.dal.StockEntity;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -15,8 +16,6 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
 import org.hibernate.query.Query;
 import org.hibernate.service.ServiceRegistry;
-
-import javassist.expr.Instanceof;
 
 public class HibernateService {
     private SessionFactory sessionFactory;
@@ -38,6 +37,8 @@ public class HibernateService {
                 configuration.setProperties(settings);
 
                 configuration.addAnnotatedClass(PurchaseEntity.class);
+                configuration.addAnnotatedClass(StockEntity.class);
+                configuration.addAnnotatedClass(ProductionEntity.class);
 
                 ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                         .applySettings(configuration.getProperties()).build();

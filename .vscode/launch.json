@@ -8,7 +8,7 @@
             "type": "java",
             "name": "CodeLens (Launch) - Main",
             "request": "launch",
-            "mainClass": "com.bansoft.Main",
+            "mainClass": "com.bansoft.Main","shortenCommandLine": "none",
             //"projectName": "njtpserver"
             "classPaths": [
                 "${workspaceFolder}/target/*",

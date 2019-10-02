@@ -1,6 +1,5 @@
 package com.bansoft.Sale;
 
-import java.time.Instant;
 import java.util.HashMap;
 import java.util.List;
 
@@ -12,7 +11,6 @@ import com.bansoft.Sale.model.ISale;
 import com.bansoft.Sale.model.ISaleBuilder;
 import com.bansoft.Sale.model.SaleBuilder;
 import com.bansoft.Stock.IStockService;
-import com.bansoft.Stock.model.IStock;
 import com.bansoft.dal.hibernate.HibernateService;
 
 public class SaleService implements ISaleService {
@@ -50,14 +48,14 @@ public class SaleService implements ISaleService {
         Sale.setId(pe.getId());
         if (cache.containsKey(pe.getId())) {
             // old Sale. Update stock
-            IStock stock = stockService.getStockBySaleId(pe.getId());
+           // IStock stock = stockService.getStockBySaleId(pe.getId());
             // stock.set
         } else {        
 
-            IStock stock = stockService.newStock()
-            .SaleId(pe.getId()).qty(pe.getQty()).timestamp(Instant.now())
-                    .build();
-                stockService.commitStock(stock);
+            // IStock stock = stockService.newStock()
+            // .SaleId(pe.getId()).qty(pe.getQty()).timestamp(Instant.now())
+            //         .build();
+            //     stockService.commitStock(stock);
         }
         cache.put(pe.getId(), Sale);
         this.SaleTopic.supplyAdd(SaleConverter.fromSaleModelToSupply(Sale));

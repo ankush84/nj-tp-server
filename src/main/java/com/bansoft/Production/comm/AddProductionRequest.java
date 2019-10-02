@@ -6,15 +6,11 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 import com.bansoft.Production.IProductionService;
-import com.bansoft.Production.model.IProduction;
-import com.bansoft.Production.model.IProductionBuilder;
 import com.bansoft.Production.model.ProductionJob;
 import com.bansoft.Stock.IStockService;
 import com.bansoft.Stock.model.IStock;
 import com.bansoft.comm.Request;
 import com.bansoft.comm.payload.ReplyMessage;
-
-import org.hibernate.mapping.List;
 
 public class AddProductionRequest extends Request {
     private IProductionService productionService;

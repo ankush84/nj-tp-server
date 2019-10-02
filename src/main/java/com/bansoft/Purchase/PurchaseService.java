@@ -50,7 +50,7 @@ public class PurchaseService implements IPurchaseService {
         purchase.setId(pe.getId());
         if (cache.containsKey(pe.getId())) {
             // old purchase. Update stock
-            IStock stock = stockService.getStockByPurchaseId(pe.getId());
+            //IStock stock = stockService.getStockByPurchaseId(pe.getId());
             // stock.set
         } else {        
             IStock stock = stockService.newStock().productName(pe.getProductName())
