@@ -16,14 +16,12 @@ import com.bansoft.dal.hibernate.HibernateService;
 
 public class StockService implements IStockService {
 
-    private HashMap<Long, IStock> cache;
     private HashMap<String, HashMap<Long, IStock>> cacheByProductName;
     private StockDao dao;
     private StockTopic StockTopic;
     final double THRESHOLD = .001;
 
     public StockService(HibernateService hibernateService) {
-        // this.cache = new HashMap<>();
         this.cacheByProductName = new HashMap<>();
         this.dao = new StockDao(hibernateService);
         StockTopic = new StockTopic(this);
@@ -65,7 +63,12 @@ public class StockService implements IStockService {
 
     @Override
     public IStock[] getAllStocks() {
-        return this.cache.values().toArray(new IStock[0]);
+        List<IStock> stocksToSupply = new LinkedList<>();
+        for (HashMap<Long,IStock> map : cacheByProductName.values()) {
+            stocksToSupply.addAll(map.values());
+        }
+
+        return stocksToSupply.toArray(new IStock[0]);
     }
 
     @Override
