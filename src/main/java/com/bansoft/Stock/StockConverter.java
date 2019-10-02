@@ -10,16 +10,17 @@ import com.bansoft.Stock.model.StockBuilder;
 public class StockConverter {
 
     public static StockEntity fromStockModelToEntity(IStock model) {
-        StockEntity pe = new StockEntity();
-        pe.setPurchaseId(model.getPurchaseId());
-        pe.setQty(model.getQty());
-        pe.setTimestamp(model.getTimestamp().toEpochMilli());
-
-        return pe;
+        StockEntity entity = new StockEntity();
+        entity.setId(model.getId());
+        entity.setPurchaseId(model.getPurchaseId());
+        entity.setQty(model.getQty());
+        entity.setTimestamp(model.getTimestamp().toEpochMilli());
+        return entity;
     }
 
     public static IStock fromStockEntityToModel(StockEntity entity) {
         StockBuilder builder = new StockBuilder();
+        builder.Id(entity.getId());
         builder.purchaseId(entity.getPurchaseId());
         builder.qty(entity.getQty());
         builder.timestamp(Instant.ofEpochMilli(entity.getTimestamp()));
@@ -28,10 +29,11 @@ public class StockConverter {
     }
 
     public static StockSupply fromStockModelToSupply(IStock model) {
-        StockSupply ps = new StockSupply();
-        ps.purchaseId = model.getPurchaseId();
-        ps.qty = model.getQty();
-        ps.timestamp = model.getTimestamp().toEpochMilli();
-        return ps;
+        StockSupply supply = new StockSupply();
+        supply.id = model.getId();
+        supply.purchaseId = model.getPurchaseId();
+        supply.qty = model.getQty();
+        supply.timestamp = model.getTimestamp().toEpochMilli();
+        return supply;
     }
 }

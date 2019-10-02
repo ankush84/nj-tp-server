@@ -53,8 +53,7 @@ public class PurchaseService implements IPurchaseService {
             IStock stock = stockService.getStockByPurchaseId(pe.getId());
             // stock.set
         } else {        
-
-            IStock stock = stockService.newStock()
+            IStock stock = stockService.newStock().productName(pe.getProductName())
             .purchaseId(pe.getId()).qty(pe.getQty()).timestamp(Instant.now())
                     .build();
                 stockService.commitStock(stock);

@@ -6,6 +6,7 @@ public class StockModel implements IStock {
 
     private Long id;
     private Long purchaseId;
+    private String productName;
     private Double qty;
     private Instant timestamp;
 
@@ -19,7 +20,7 @@ public class StockModel implements IStock {
 
 	@Override
 	public Long getPurchaseId() {		
-		return this.id;
+		return this.purchaseId;
 	}
 
 	@Override
@@ -39,7 +40,7 @@ public class StockModel implements IStock {
 
 	@Override
     public void setPurchaseId(Long id) {		
-        this.id = id;
+        this.purchaseId = id;
     }
 
 
@@ -52,6 +53,16 @@ public class StockModel implements IStock {
 	@Override
 	public void setTimestamp(Instant timestamp) {
 		this.timestamp=timestamp;		
+	}
+
+	@Override
+	public String getProductName() {
+		return productName;
+	}
+
+	@Override
+	public void setProductName(String productName) {
+		this.productName = productName;
 	}
     
 }

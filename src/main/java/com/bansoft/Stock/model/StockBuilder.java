@@ -7,9 +7,15 @@ public class StockBuilder implements IStockBuilder{
     private StockModel StockModel;
     public StockBuilder() {
         this.StockModel=new StockModel();
-        StockModel.setId(0L);
+        //StockModel.setId(0L);
     }
 
+    @Override
+    public IStockBuilder Id(Long id) {
+       this.StockModel.setId(id);
+        return this;
+    }
+    
     @Override
     public IStockBuilder purchaseId(Long id) {
        this.StockModel.setPurchaseId(id);
@@ -31,6 +37,12 @@ public class StockBuilder implements IStockBuilder{
     @Override
     public IStock build() {                
         return StockModel;
+    }
+
+    @Override
+    public IStockBuilder productName(String productName) {
+        this.StockModel.setProductName(productName);
+        return this;
     }
         
 }

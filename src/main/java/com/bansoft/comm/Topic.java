@@ -44,13 +44,13 @@ public abstract class Topic {
         }
     }
 
-    protected void supplyUpdate(Object supply) {
+    public void supplyUpdate(Object supply) {
         for (ISubscriptionListener listener : listenersMap.values()) {
             listener.supplyUpdate(supply);
         }
     }
     
-    protected void supplyRemove(Object supply) {
+    public void supplyRemove(Object supply) {
         for (ISubscriptionListener listener : listenersMap.values()) {
             listener.supplyRemove(supply);
         }

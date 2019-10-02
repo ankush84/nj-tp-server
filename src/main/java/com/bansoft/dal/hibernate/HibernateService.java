@@ -1,6 +1,8 @@
 package com.bansoft.dal.hibernate;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import com.bansoft.Purchase.dal.PurchaseEntity;
@@ -11,15 +13,19 @@ import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
+import org.hibernate.query.Query;
 import org.hibernate.service.ServiceRegistry;
+
+import javassist.expr.Instanceof;
+
 public class HibernateService {
     private SessionFactory sessionFactory;
-    
+
     public HibernateService() {
         init();
     }
 
-    public void init(){
+    public void init() {
         getSessionFactory();
     }
 
@@ -32,9 +38,9 @@ public class HibernateService {
                 configuration.setProperties(settings);
 
                 configuration.addAnnotatedClass(PurchaseEntity.class);
-                
+
                 ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
-                    .applySettings(configuration.getProperties()).build();
+                        .applySettings(configuration.getProperties()).build();
                 sessionFactory = configuration.buildSessionFactory(serviceRegistry);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -42,6 +48,7 @@ public class HibernateService {
         }
         return sessionFactory;
     }
+
     private Properties initProperties() {
         Properties properties = new Properties();
         properties.put(Environment.DRIVER, "com.mysql.cj.jdbc.Driver");
@@ -54,7 +61,7 @@ public class HibernateService {
         properties.put(Environment.HBM2DDL_AUTO, "update");
         return properties;
     }
-    
+
     public boolean save(Object entity) {
         Transaction transaction = null;
         try (Session session = getSessionFactory().openSession()) {
@@ -75,8 +82,20 @@ public class HibernateService {
     }
 
     public <T> List<T> getAll(Class<T> clazz, String name) {
-        try (Session session =getSessionFactory().openSession()) {
-            return session.createQuery("from "+name, clazz).list();
+        try (Session session = getSessionFactory().openSession()) {
+            return session.createQuery("from " + name, clazz).list();
+        }
+    }
+
+    public <T> List<T> getAllWhere(Class<T> clazz, String name, String whereClause, HashMap<String, Object> params) {
+        try (Session session = getSessionFactory().openSession()) {
+            Query<T> query = session.createQuery("from " + name + " where " + whereClause, clazz);
+            for (String key : params.keySet()) {
+
+                query.setParameter(key, params.get(key));
+
+            }
+            return query.list();
         }
     }
 }
