@@ -2,6 +2,7 @@
 package com.bansoft.Production.comm;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -25,19 +26,19 @@ public class AddProductionRequest extends Request {
     @Override
     protected ReplyMessage getReply(HashMap<String, Object> args) {
 
-        String[] productNames = (String[]) args.get("productNames");
-        String[] qtyUsedAry = (String[]) args.get("qtyUSed");
-        String[] qtyWasteAry = (String[]) args.get("qtyWaste");
+        ArrayList<String> productNames = ((ArrayList<String>) args.get("productNames"));
+        ArrayList<Double> qtyUsedAry = (ArrayList<Double>) args.get("qtyUSed");
+        ArrayList<Double> qtyWasteAry = (ArrayList<Double>) args.get("qtyWaste");
         String lotNumber = args.get("lotNumber").toString();
         String details = args.get("details").toString();
         Instant timeInstant = Instant.now();
         LinkedList<ProductionJob> productionJobs = new LinkedList<ProductionJob>();
         LinkedList<String> outOfStock = new LinkedList<String>();
 
-        for (int i = 0; i < productNames.length; i++) {
-            String productName = productNames[i];
-            Double qtyUsed = Double.valueOf(qtyUsedAry[i]);
-            Double qtyWaste = Double.valueOf(qtyWasteAry[i]);
+        for (int i = 0; i < productNames.size(); i++) {
+            String productName = productNames.get(i);
+            Double qtyUsed = Double.valueOf(qtyUsedAry.get(i));
+            Double qtyWaste = Double.valueOf(qtyWasteAry.get(i));
 
             Double requiredQty = qtyUsed + qtyWaste;
             IStock[] stocks = stockService.takeOutStocksForProduct(productName, requiredQty);
