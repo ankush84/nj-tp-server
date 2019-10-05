@@ -9,6 +9,7 @@ public interface IProduction{
     String getProductName();
     Double getQtyUsed();
     Double getQtyWaste();
+    Double getPrice();
     String getLotNumber();
     String getDetails();
     Instant getTimestamp();
@@ -19,6 +20,7 @@ public interface IProduction{
     void setProductName(String productName);
     void setQtyUsed(Double qtyUsed);
     void setQtyWaste(Double qtyWaste);
+    void setPrice(Double price);
     void setLotNumber(String lotNumber);
     void setDetails(String details);
     void setTimestamp(Instant timestamp);

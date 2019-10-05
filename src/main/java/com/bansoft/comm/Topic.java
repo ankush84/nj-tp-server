@@ -18,17 +18,19 @@ public abstract class Topic {
         return name;
     }
 
-    public void addSubscription(MessagingAdapter messagingAdapter) {
-        if (!listenersMap.containsKey(messagingAdapter.getSessionId())) {
-            listenersMap.put(messagingAdapter.getSessionId(),
-                    new SupplyListener(messagingAdapter, name));
+    public void addSubscription(String id, MessagingAdapter messagingAdapter) {
+        String subId=messagingAdapter.getSessionId()+"_"+id;
+        if (!listenersMap.containsKey(subId)) {
+            listenersMap.put(subId,
+                    new SupplyListener(id, messagingAdapter, name));
             supplyCurrentCache(messagingAdapter);
         }
     }
 
-    public void removeSubscription(MessagingAdapter messagingAdapter) {
-            if (listenersMap.containsKey(messagingAdapter.getSessionId())) {
-                listenersMap.remove(messagingAdapter.getSessionId());
+    public void removeSubscription(String id, MessagingAdapter messagingAdapter) {
+        String subId = messagingAdapter.getSessionId() + "_" + id;
+            if (listenersMap.containsKey(subId)) {
+                listenersMap.remove(subId);
             }       
     }
     

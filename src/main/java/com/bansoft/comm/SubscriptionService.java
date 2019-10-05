@@ -25,21 +25,21 @@ public class SubscriptionService {
         }
     }
 
-    public void addSubscription(String topic, MessagingAdapter messagingAdapter) {
+    public void addSubscription(String id,String topic, MessagingAdapter messagingAdapter) {
         if (topicsMap.containsKey(topic)) {
-            topicsMap.get(topic).addSubscription(messagingAdapter);
+            topicsMap.get(topic).addSubscription(id, messagingAdapter);
         }
     }
 
-    public void removeSubscription(String topic, MessagingAdapter messagingAdapter) {
+    public void removeSubscription(String id, String topic, MessagingAdapter messagingAdapter) {
         if (topicsMap.containsKey(topic)) {
-            topicsMap.get(topic).removeSubscription(messagingAdapter);
+            topicsMap.get(topic).removeSubscription(id,messagingAdapter);
         }
     }
 
     public void removeAllSubscription(MessagingAdapter messagingAdapter) {
         for (String topic : topicsMap.keySet()) {
-            removeSubscription(topic, messagingAdapter);
+            //removeSubscription(topic, messagingAdapter);
         }
     }
 

@@ -53,6 +53,13 @@ public class ProductionBuilder implements IProductionBuilder {
         return this;
     }
 
+    
+    @Override
+    public IProductionBuilder price(Double price) {
+        this.ProductionModel.setPrice(price);
+        return this;
+    }
+
     @Override
     public IProductionBuilder timestamp(Instant dt) {
         this.ProductionModel.setTimestamp(dt);

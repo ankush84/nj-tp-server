@@ -117,7 +117,7 @@ public class StockService implements IStockService {
         }
 
         IStock slicedStock = newStock().Id(stockToSlice.getId()).productName(stockToSlice.getProductName())
-                .purchaseId(stockToSlice.getPurchaseId()).qty(qtyToSlice).timestamp(stockToSlice.getTimestamp())
+                .purchaseId(stockToSlice.getPurchaseId()).qty(qtyToSlice).price(stockToSlice.getPrice()).timestamp(stockToSlice.getTimestamp())
                 .build();
         stocksToTakeOut.add(slicedStock);
 

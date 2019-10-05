@@ -8,6 +8,7 @@ public class StockModel implements IStock {
     private Long purchaseId;
     private String productName;
     private Double qty;
+    private Double price;
     private Instant timestamp;
 
     public StockModel(){        
@@ -26,6 +27,12 @@ public class StockModel implements IStock {
 	@Override
 	public Double getQty() {		
 		return this.qty;
+	}
+
+	
+	@Override
+	public Double getPrice() {		
+		return this.price;
 	}
 	
 	@Override
@@ -47,6 +54,11 @@ public class StockModel implements IStock {
 	@Override
 	public void setQty(Double qty) {
 		this.qty=qty;	
+	}
+
+	@Override
+	public void setPrice(Double price) {
+		this.price=price;	
 	}
 
 

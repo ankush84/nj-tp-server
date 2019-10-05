@@ -7,6 +7,7 @@ public interface IStockBuilder{
     IStockBuilder productName(String productName);    
     IStockBuilder purchaseId(Long purchaseId);    
     IStockBuilder qty(Double qty);
+    IStockBuilder price(Double price);
     IStockBuilder timestamp(Instant dt);
     IStock build();
 }

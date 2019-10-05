@@ -81,6 +81,7 @@ public class ProductionService implements IProductionService {
                 builder.purchaseId(stock.getPurchaseId());
                 builder.qtyUsed(stock.getQty() * qtyUsedPct);
                 builder.qtyWaste(stock.getQty() * qtyWastePct);
+                builder.price(stock.getPrice());
                 builder.timestamp(timeInstant);
                 this.commitProduction(builder.build());
             }

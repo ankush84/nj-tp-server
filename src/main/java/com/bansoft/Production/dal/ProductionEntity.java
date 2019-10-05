@@ -28,6 +28,10 @@ public class ProductionEntity {
     
     @Column        
     private Double qtyWaste;
+
+    
+    @Column        
+    private Double price;
     
     @Column    
     private String lotNumber;
@@ -111,6 +115,14 @@ public class ProductionEntity {
 
     public void setStockId(Long stockId) {
         this.stockId = stockId;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
 }

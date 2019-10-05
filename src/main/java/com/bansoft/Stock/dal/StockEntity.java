@@ -23,6 +23,10 @@ public class StockEntity {
 
     @Column        
     private Double qty;
+
+    
+    @Column        
+    private Double price;
     
     @Column    
     private long timestamp;
@@ -46,6 +50,17 @@ public class StockEntity {
     public void setQty(Double qty) {
         this.qty = qty;
     }
+
+
+    
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
 
     public long getTimestamp() {
         return timestamp;

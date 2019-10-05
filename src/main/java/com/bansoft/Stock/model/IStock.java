@@ -7,11 +7,13 @@ public interface IStock{
     Long getPurchaseId();
     String getProductName();
     Double getQty();
+    Double getPrice();
     Instant getTimestamp();
 
     void setId(Long id);
     void setProductName(String id);
     void setPurchaseId(Long id);
     void setQty(Double qty);
+    void setPrice(Double price);
     void setTimestamp(Instant timestamp);
 }

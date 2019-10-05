@@ -13,9 +13,11 @@ public class ProductionConverter {
         ProductionEntity pe = new ProductionEntity();
         pe.setDetails(model.getDetails());
         pe.setLotNumber(model.getLotNumber());
+        pe.setProductName(model.getProductName());
         pe.setPurchaseId(model.getPurchaseId());
         pe.setQtyUsed(model.getQtyUsed());
         pe.setQtyWaste(model.getQtyWaste());
+        pe.setPrice(model.getPrice());
         pe.setTimestamp(model.getTimestamp().toEpochMilli());
 
         return pe;
@@ -26,8 +28,10 @@ public class ProductionConverter {
         builder.details(entity.getDetails());
         builder.lotNumber(entity.getLotNumber());
         builder.purchaseId(entity.getPurchaseId());
+        builder.productName(entity.getProductName());
         builder.qtyUsed(entity.getQtyUsed());
         builder.qtyWaste(entity.getQtyWaste());
+        builder.price(entity.getPrice());
         builder.timestamp(Instant.ofEpochMilli(entity.getTimestamp()));
 
         return builder.build();
@@ -37,10 +41,12 @@ public class ProductionConverter {
         ProductionSupply ps = new ProductionSupply();
         ps.details=model.getDetails();
         ps.id= model.getId();
-        ps.lotNumer= model.getLotNumber();
+        ps.lotNumber= model.getLotNumber();
+        ps.productName= model.getProductName();
         ps.purchaseId = model.getPurchaseId();
         ps.qtyUsed = model.getQtyUsed();
         ps.qtyWaste = model.getQtyWaste();
+        ps.price = model.getPrice();
         ps.timestamp = model.getTimestamp().toEpochMilli();
         return ps;
     }

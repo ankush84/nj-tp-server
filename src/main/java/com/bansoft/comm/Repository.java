@@ -24,11 +24,11 @@ public class Repository {
     }
     
     private void initDummyUser() {
-        User user = new User("alice", "123456");
+        User user = new User("nikhil", "nikhil");
         users.put(user.username, user);
-        user = new User("bob", "654321");
+        user = new User("anshul", "anshul");
         users.put(user.username, user);
-        user = new User("charlie", "qwerty");
+        user = new User("naveen", "naveen");
         users.put(user.username, user);
     }
     

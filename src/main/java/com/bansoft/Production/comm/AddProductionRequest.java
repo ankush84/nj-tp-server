@@ -26,9 +26,9 @@ public class AddProductionRequest extends Request {
     @Override
     protected ReplyMessage getReply(HashMap<String, Object> args) {
 
-        ArrayList<String> productNames = ((ArrayList<String>) args.get("productNames"));
-        ArrayList<Double> qtyUsedAry = (ArrayList<Double>) args.get("qtyUSed");
-        ArrayList<Double> qtyWasteAry = (ArrayList<Double>) args.get("qtyWaste");
+        ArrayList<String> productNames = (ArrayList<String>) args.get("productNames");
+        ArrayList<String> qtyUsedAry = (ArrayList<String>) args.get("qtyUsed");
+        ArrayList<String> qtyWasteAry = (ArrayList<String>) args.get("qtyWaste");
         String lotNumber = args.get("lotNumber").toString();
         String details = args.get("details").toString();
         Instant timeInstant = Instant.now();

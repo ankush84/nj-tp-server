@@ -10,6 +10,7 @@ public class ProductionModel implements IProduction {
     private String productName;
     private Double qtyUsed;
     private Double qtyWaste;
+    private Double price;
     private String details;
     private String lotNumber;
     private Instant timestamp;
@@ -97,6 +98,14 @@ public class ProductionModel implements IProduction {
 
 	public void setStockId(Long stockId) {
 		this.stockId = stockId;
+	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
 	}
     
 }

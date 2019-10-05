@@ -28,6 +28,13 @@ public class StockBuilder implements IStockBuilder{
         return this;
     }
 
+    
+    @Override
+    public IStockBuilder price(Double price) {
+        this.StockModel.setPrice(price);
+        return this;
+    }
+
     @Override
     public IStockBuilder timestamp(Instant dt) {
         this.StockModel.setTimestamp(dt);

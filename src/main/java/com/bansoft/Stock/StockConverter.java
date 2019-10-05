@@ -15,6 +15,7 @@ public class StockConverter {
         entity.setProductName(model.getProductName());
         entity.setPurchaseId(model.getPurchaseId());
         entity.setQty(model.getQty());
+        entity.setPrice(model.getPrice());
         entity.setTimestamp(model.getTimestamp().toEpochMilli());
         return entity;
     }
@@ -25,6 +26,7 @@ public class StockConverter {
         builder.productName(entity.getProductName());
         builder.purchaseId(entity.getPurchaseId());
         builder.qty(entity.getQty());
+        builder.price(entity.getPrice());
         builder.timestamp(Instant.ofEpochMilli(entity.getTimestamp()));
 
         return builder.build();
@@ -36,6 +38,7 @@ public class StockConverter {
         supply.productName = model.getProductName();
         supply.purchaseId = model.getPurchaseId();
         supply.qty = model.getQty();
+        supply.price = model.getPrice();
         supply.timestamp = model.getTimestamp().toEpochMilli();
         return supply;
     }
