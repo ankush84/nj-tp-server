@@ -12,3 +12,4 @@ buildNumber.properties
 !/.mvn/wrapper/maven-wrapper.jar
 .classpath
 .settings/org.eclipse.core.resources.prefs
+src/main/resources/webapp/
