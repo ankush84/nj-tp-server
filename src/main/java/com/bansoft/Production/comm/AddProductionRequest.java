@@ -57,7 +57,7 @@ public class AddProductionRequest extends Request {
             }
             ReplyMessage rm = new ReplyMessage();
             rm.returnCode = -1;
-            rm.returnvalues = new String[] { "Out of stock." };
+            rm.returnValues = new String[] { "Out of stock." };
             // outOfStock.stream().collect(collector);
             return rm;
         }
