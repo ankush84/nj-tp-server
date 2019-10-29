@@ -1,7 +1,9 @@
 package com.bansoft;
 
 import com.bansoft.Production.ProductionService;
+import com.bansoft.ProductionStock.ProductionStockService;
 import com.bansoft.Purchase.PurchaseService;
+import com.bansoft.Sale.SaleService;
 import com.bansoft.Stock.StockService;
 import com.bansoft.dal.hibernate.HibernateService;
 
@@ -13,8 +15,10 @@ public class Main {
 
 		HibernateService hibernateService = new HibernateService();
 		StockService stockService = new StockService(hibernateService);
+		ProductionStockService pss=new ProductionStockService(hibernateService);
 		new PurchaseService(hibernateService, stockService);
-		new ProductionService(hibernateService, stockService);
+		new ProductionService(hibernateService, stockService,pss);
+		new SaleService(hibernateService, pss);
 
 		theServer.start();
 	}

@@ -5,11 +5,13 @@ import java.time.Instant;
 public class SaleModel implements ISale {
 
     private Long id;
+    private String party;
+    private String billNo;
+    private Long saleNo;
     private String productName;
-    private Double price;
-    private Double qty;
+    private Double qtyUsed;
     private String details;
-    private String billingId;
+    private String lotNumber;
     private Instant timestamp;
 
     public SaleModel(){        
@@ -20,25 +22,6 @@ public class SaleModel implements ISale {
 		return this.id;
 	}
 
-	@Override
-	public String getProductName() {		
-		return this.productName;
-	}
-
-	@Override
-	public Double getPrice() {		
-		return this.price;
-	}
-
-	@Override
-	public Double getQty() {		
-		return this.qty;
-	}
-
-	@Override
-	public String getBillingId() {		
-		return this.billingId;
-	}
 
 	@Override
 	public String getDetails() {		
@@ -56,25 +39,6 @@ public class SaleModel implements ISale {
     }
 
 
-	@Override
-	public void setProductName(String productName) {
-		this.productName= productName;		
-	}
-
-	@Override
-	public void setPrice(Double price) {
-		this.price=price;		
-	}
-
-	@Override
-	public void setQty(Double qty) {
-		this.qty=qty;	
-	}
-
-	@Override
-	public void setBillingId(String billingId) {
-		this.billingId=billingId;		
-	}
 
 	@Override
 	public void setDetails(String details) {
@@ -86,5 +50,54 @@ public class SaleModel implements ISale {
 	public void setTimestamp(Instant timestamp) {
 		this.timestamp=timestamp;		
 	}
-    
+
+	public Double getQtyUsed() {
+		return qtyUsed;
+	}
+
+	public void setQtyUsed(Double qtyUsed) {
+		this.qtyUsed = qtyUsed;
+	}
+
+	public String getLotNumber() {
+		return lotNumber;
+	}
+
+	public void setLotNumber(String lotNumber) {
+		this.lotNumber = lotNumber;
+	}
+
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+
+	public String getParty() {
+		return party;
+	}
+
+	public void setParty(String party) {
+		this.party = party;
+	}
+
+	public String getBillNo() {
+		return billNo;
+	}
+
+	public void setBillNo(String billNo) {
+		this.billNo = billNo;
+	}
+
+	public Long getSaleNo() {
+		return saleNo;
+	}
+
+	public void setSaleNo(Long saleNo) {
+		this.saleNo = saleNo;
+	}
+
+	    
 }

@@ -13,6 +13,8 @@ import com.bansoft.Production.model.IProduction;
 import com.bansoft.Production.model.IProductionBuilder;
 import com.bansoft.Production.model.ProductionBuilder;
 import com.bansoft.Production.model.ProductionJob;
+import com.bansoft.ProductionStock.IProductionStockService;
+import com.bansoft.ProductionStock.model.IProductionStock;
 import com.bansoft.Stock.IStockService;
 import com.bansoft.Stock.model.IStock;
 import com.bansoft.dal.hibernate.HibernateService;
@@ -23,8 +25,11 @@ public class ProductionService implements IProductionService {
     private ProductionDao dao;
     private ProductionTopic ProductionTopic;
     private long maxLotNumber=0;
+    private IProductionStockService productionStockService;
 
-    public ProductionService(HibernateService hibernateService, IStockService stockService) {
+    public ProductionService(HibernateService hibernateService, IStockService stockService,
+                                IProductionStockService productionStockService) {
+        this.productionStockService = productionStockService;
         this.cache = new HashMap<>();
         this.dao = new ProductionDao(hibernateService);
         ProductionTopic = new ProductionTopic(this);
@@ -74,11 +79,15 @@ public class ProductionService implements IProductionService {
             LinkedList<ProductionJob> productionJobs) {
                 
         lotNumber=(++maxLotNumber)+"";
+        Double productionStockQty=0.0;
         for (ProductionJob job : productionJobs) {
 
             Double totalQty = job.getQtyUsed() + job.getQtyWaste();
             Double qtyUsedPct = job.getQtyUsed() / (totalQty);
             Double qtyWastePct = job.getQtyWaste() / (totalQty);
+            
+            productionStockQty += job.getQtyUsed();
+
             for (IStock stock : job.getStocks()) {
 
                 IProductionBuilder builder = newProduction();
@@ -95,5 +104,11 @@ public class ProductionService implements IProductionService {
                 this.commitProduction(builder.build());
             }
         }
+
+        IProductionStock stock = productionStockService.newProductionStock().productName(finalProductName)
+        .lotNumber(lotNumber).qty(productionStockQty).timestamp(Instant.now())
+                .build();
+            productionStockService.commitProductionStock(stock);
+
     }
 }

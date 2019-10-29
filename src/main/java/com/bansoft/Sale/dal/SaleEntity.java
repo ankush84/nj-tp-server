@@ -14,20 +14,26 @@ public class SaleEntity {
     @GeneratedValue
     private Long id;
     
-    @Column
-    String productName;
+    @Column        
+    private String productName;
+    
+    @Column        
+    private String party;
+    
+    @Column        
+    private String billNo;
+    
+    @Column        
+    private Long saleNo;
+    
+    @Column        
+    private Double qtyUsed;
     
     @Column    
-    private Double price;
+    private String lotNumber;
 
-    @Column        
-    private Double qty;
-    
     @Column    
     private String details;
-
-    @Column    
-    private String billingId;
 
     @Column    
     private long timestamp;
@@ -43,36 +49,29 @@ public class SaleEntity {
         this.id = id;
     }
 
-    public String getProductName() {
-        return productName;
+    
+    public long getTimestamp() {
+        return timestamp;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
     }
 
-    public Double getPrice() {
-        return price;
+    public Double getQtyUsed() {
+        return qtyUsed;
     }
 
-    public void setPrice(Double price) {
-        this.price = price;
+    public void setQtyUsed(Double qtyUsed) {
+        this.qtyUsed = qtyUsed;
     }
 
-    public Double getQty() {
-        return qty;
+    public String getLotNumber() {
+        return lotNumber;
     }
 
-    public void setQty(Double qty) {
-        this.qty = qty;
-    }
-
-    public String getBillingId() {
-        return billingId;
-    }
-
-    public void setBillingId(String billingId) {
-        this.billingId = billingId;
+    public void setLotNumber(String lotNumber) {
+        this.lotNumber = lotNumber;
     }
 
     public String getDetails() {
@@ -81,14 +80,38 @@ public class SaleEntity {
 
     public void setDetails(String details) {
         this.details = details;
-    }  
-
-    public long getTimestamp() {
-        return timestamp;
     }
 
-    public void setTimestamp(long timestamp) {
-        this.timestamp = timestamp;
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public String getParty() {
+        return party;
+    }
+
+    public void setParty(String party) {
+        this.party = party;
+    }
+
+    public String getBillNo() {
+        return billNo;
+    }
+
+    public void setBillNo(String billNo) {
+        this.billNo = billNo;
+    }
+
+    public Long getSaleNo() {
+        return saleNo;
+    }
+
+    public void setSaleNo(Long saleNo) {
+        this.saleNo = saleNo;
     }
 
 }

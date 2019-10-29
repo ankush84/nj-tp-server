@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Properties;
 
 import com.bansoft.Production.dal.ProductionEntity;
+import com.bansoft.ProductionStock.dal.ProductionStockEntity;
 import com.bansoft.Purchase.dal.PurchaseEntity;
+import com.bansoft.Sale.dal.SaleEntity;
 import com.bansoft.Stock.dal.StockEntity;
 
 import org.hibernate.Session;
@@ -39,6 +41,8 @@ public class HibernateService {
                 configuration.addAnnotatedClass(PurchaseEntity.class);
                 configuration.addAnnotatedClass(StockEntity.class);
                 configuration.addAnnotatedClass(ProductionEntity.class);
+                configuration.addAnnotatedClass(ProductionStockEntity.class);
+                configuration.addAnnotatedClass(SaleEntity.class);
 
                 ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                         .applySettings(configuration.getProperties()).build();

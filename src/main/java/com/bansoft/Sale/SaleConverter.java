@@ -11,11 +11,13 @@ public class SaleConverter {
 
     public static SaleEntity fromSaleModelToEntity(ISale model) {
         SaleEntity pe = new SaleEntity();
-        pe.setBillingId(model.getBillingId());
         pe.setDetails(model.getDetails());
-        pe.setPrice(model.getPrice());
+        pe.setLotNumber(model.getLotNumber());
+        pe.setParty(model.getParty());
         pe.setProductName(model.getProductName());
-        pe.setQty(model.getQty());
+        pe.setBillNo(model.getBillNo());
+        pe.setQtyUsed(model.getQtyUsed());
+        pe.setSaleNo(model.getSaleNo());
         pe.setTimestamp(model.getTimestamp().toEpochMilli());
 
         return pe;
@@ -23,11 +25,13 @@ public class SaleConverter {
 
     public static ISale fromSaleEntityToModel(SaleEntity entity) {
         SaleBuilder builder = new SaleBuilder();
-        builder.billingId(entity.getBillingId());
         builder.details(entity.getDetails());
-        builder.price(entity.getPrice());
+        builder.lotNumber(entity.getLotNumber());
+        builder.party(entity.getParty());
         builder.productName(entity.getProductName());
-        builder.qty(entity.getQty());
+        builder.billNo(entity.getBillNo());
+        builder.qtyUsed(entity.getQtyUsed());
+        builder.saleNumber(entity.getSaleNo());
         builder.timestamp(Instant.ofEpochMilli(entity.getTimestamp()));
 
         return builder.build();
@@ -35,11 +39,14 @@ public class SaleConverter {
 
     public static SaleSupply fromSaleModelToSupply(ISale model) {
         SaleSupply ps = new SaleSupply();
-        ps.billingId=model.getBillingId();
-        ps.details= model.getDetails();
-        ps.price= model.getPrice();
-        ps.productName = model.getProductName();
-        ps.qty = model.getQty();
+        ps.details=model.getDetails();
+        ps.id= model.getId();
+        ps.lotNumber= model.getLotNumber();
+        ps.productName= model.getProductName();
+        ps.party= model.getParty();
+        ps.billNo = model.getBillNo();
+        ps.qtyUsed = model.getQtyUsed();
+        ps.saleNo = model.getSaleNo();
         ps.timestamp = model.getTimestamp().toEpochMilli();
         return ps;
     }

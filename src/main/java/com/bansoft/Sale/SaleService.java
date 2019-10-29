@@ -1,8 +1,12 @@
 package com.bansoft.Sale;
 
+import java.time.Instant;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
+import com.bansoft.ProductionStock.IProductionStockService;
+import com.bansoft.ProductionStock.model.IProductionStock;
 import com.bansoft.Sale.comm.AddSaleRequest;
 import com.bansoft.Sale.comm.SaleTopic;
 import com.bansoft.Sale.dal.SaleDao;
@@ -10,7 +14,7 @@ import com.bansoft.Sale.dal.SaleEntity;
 import com.bansoft.Sale.model.ISale;
 import com.bansoft.Sale.model.ISaleBuilder;
 import com.bansoft.Sale.model.SaleBuilder;
-import com.bansoft.Stock.IStockService;
+import com.bansoft.Sale.model.SaleJob;
 import com.bansoft.dal.hibernate.HibernateService;
 
 public class SaleService implements ISaleService {
@@ -18,14 +22,13 @@ public class SaleService implements ISaleService {
     private HashMap<Long, ISale> cache;
     private SaleDao dao;
     private SaleTopic SaleTopic;
-    private IStockService stockService;
+    private long maxSaleNumber=0;
 
-    public SaleService(HibernateService hibernateService, IStockService stockService) {
-        this.stockService = stockService;
+    public SaleService(HibernateService hibernateService, IProductionStockService stockService) {
         this.cache = new HashMap<>();
         this.dao = new SaleDao(hibernateService);
         SaleTopic = new SaleTopic(this);
-        new AddSaleRequest(this);
+        new AddSaleRequest(this, stockService);
         this.init();
     }
 
@@ -33,6 +36,11 @@ public class SaleService implements ISaleService {
         List<SaleEntity> entities = this.dao.loadAll();
         for (SaleEntity pe : entities) {
             this.cache.put(pe.getId(), SaleConverter.fromSaleEntityToModel(pe));
+
+            Integer lotNumber =Integer.parseInt(pe.getLotNumber());
+            if(maxSaleNumber<lotNumber){
+                maxSaleNumber=lotNumber;
+            }
         }
     }
 
@@ -44,19 +52,9 @@ public class SaleService implements ISaleService {
     @Override
     public void commitSale(ISale Sale) {
         SaleEntity pe = SaleConverter.fromSaleModelToEntity(Sale);
+        
         dao.save(pe);
         Sale.setId(pe.getId());
-        if (cache.containsKey(pe.getId())) {
-            // old Sale. Update stock
-           // IStock stock = stockService.getStockBySaleId(pe.getId());
-            // stock.set
-        } else {        
-
-            // IStock stock = stockService.newStock()
-            // .SaleId(pe.getId()).qty(pe.getQty()).timestamp(Instant.now())
-            //         .build();
-            //     stockService.commitStock(stock);
-        }
         cache.put(pe.getId(), Sale);
         this.SaleTopic.supplyAdd(SaleConverter.fromSaleModelToSupply(Sale));
     }
@@ -69,5 +67,31 @@ public class SaleService implements ISaleService {
     @Override
     public ISale[] getAllSales() {
         return this.cache.values().toArray(new ISale[0]);
+    }
+
+    @Override
+    public void produce(String party, String billNumber, String details, Instant timeInstant,
+            LinkedList<SaleJob> SaleJobs) {
+               
+        Long saleNumber =++maxSaleNumber;
+                
+        for (SaleJob job : SaleJobs) {
+
+            Double totalQty = job.getQtyUsed();
+            Double qtyUsedPct = job.getQtyUsed() / (totalQty);
+            for (IProductionStock stock : job.getStocks()) {
+
+                ISaleBuilder builder = newSale();
+                builder.party(party);
+                builder.billNo(billNumber);
+                builder.saleNumber(saleNumber);
+                builder.details(details);
+                builder.productName(job.getProductName());
+                builder.lotNumber(stock.getLotNumber());
+                builder.qtyUsed(stock.getQty() * qtyUsedPct);
+                builder.timestamp(timeInstant);
+                this.commitSale(builder.build());
+            }
+        }
     }
 }
