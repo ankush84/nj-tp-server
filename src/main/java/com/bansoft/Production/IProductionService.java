@@ -17,7 +17,7 @@ public interface IProductionService {
 
     public IProduction[] getAllProductions();
 
-	public void produce(String lotNumber, String details, Instant timeInstant, LinkedList<ProductionJob> productionJobs);
+	public void produce(String finalProductName,String lotNumber, String details, Instant timeInstant, LinkedList<ProductionJob> productionJobs);
 
     //public IEvent<IProduction> ProductionAddedEvent();
 }

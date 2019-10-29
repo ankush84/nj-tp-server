@@ -13,6 +13,7 @@ public class ProductionConverter {
         ProductionEntity pe = new ProductionEntity();
         pe.setDetails(model.getDetails());
         pe.setLotNumber(model.getLotNumber());
+        pe.setFinalProductName(model.getFinalProductName());
         pe.setProductName(model.getProductName());
         pe.setPurchaseId(model.getPurchaseId());
         pe.setQtyUsed(model.getQtyUsed());
@@ -29,6 +30,7 @@ public class ProductionConverter {
         builder.lotNumber(entity.getLotNumber());
         builder.purchaseId(entity.getPurchaseId());
         builder.productName(entity.getProductName());
+        builder.finalProductName(entity.getFinalProductName());
         builder.qtyUsed(entity.getQtyUsed());
         builder.qtyWaste(entity.getQtyWaste());
         builder.price(entity.getPrice());
@@ -43,6 +45,7 @@ public class ProductionConverter {
         ps.id= model.getId();
         ps.lotNumber= model.getLotNumber();
         ps.productName= model.getProductName();
+        ps.finalProductName= model.getFinalProductName();
         ps.purchaseId = model.getPurchaseId();
         ps.qtyUsed = model.getQtyUsed();
         ps.qtyWaste = model.getQtyWaste();

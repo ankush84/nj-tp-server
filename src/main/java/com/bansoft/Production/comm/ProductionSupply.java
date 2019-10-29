@@ -10,4 +10,5 @@ public class ProductionSupply {
      public String lotNumber;
      public String details;
      public long timestamp;
+	public String finalProductName;
 }

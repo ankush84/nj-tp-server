@@ -8,6 +8,7 @@ public class ProductionModel implements IProduction {
     private Long stockId;
     private Long purchaseId;
     private String productName;
+    private String finalProductName;
     private Double qtyUsed;
     private Double qtyWaste;
     private Double price;
@@ -106,6 +107,14 @@ public class ProductionModel implements IProduction {
 
 	public void setPrice(Double price) {
 		this.price = price;
+	}
+
+	public String getFinalProductName() {
+		return finalProductName;
+	}
+
+	public void setFinalProductName(String finalProductName) {
+		this.finalProductName=finalProductName;
 	}
     
 }

@@ -24,6 +24,9 @@ public class ProductionEntity {
     private String productName;
     
     @Column        
+    private String finalProductName;
+    
+    @Column        
     private Double qtyUsed;
     
     @Column        
@@ -107,6 +110,14 @@ public class ProductionEntity {
 
     public void setProductName(String productName) {
         this.productName = productName;
+    }
+
+    public String getFinalProductName() {
+        return finalProductName;
+    }
+
+    public void setFinalProductName(String finalProductName) {
+        this.finalProductName = finalProductName;
     }
 
     public Long getStockId() {

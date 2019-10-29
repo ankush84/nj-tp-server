@@ -22,6 +22,7 @@ public class ProductionService implements IProductionService {
     private HashMap<Long, IProduction> cache;
     private ProductionDao dao;
     private ProductionTopic ProductionTopic;
+    private long maxLotNumber=0;
 
     public ProductionService(HibernateService hibernateService, IStockService stockService) {
         this.cache = new HashMap<>();
@@ -35,6 +36,11 @@ public class ProductionService implements IProductionService {
         List<ProductionEntity> entities = this.dao.loadAll();
         for (ProductionEntity pe : entities) {
             this.cache.put(pe.getId(), ProductionConverter.fromProductionEntityToModel(pe));
+
+            Integer lotNumber =Integer.parseInt(pe.getLotNumber());
+            if(maxLotNumber<lotNumber){
+                maxLotNumber=lotNumber;
+            }
         }
     }
 
@@ -46,6 +52,7 @@ public class ProductionService implements IProductionService {
     @Override
     public void commitProduction(IProduction Production) {
         ProductionEntity pe = ProductionConverter.fromProductionModelToEntity(Production);
+        
         dao.save(pe);
         Production.setId(pe.getId());
         cache.put(pe.getId(), Production);
@@ -63,9 +70,10 @@ public class ProductionService implements IProductionService {
     }
 
     @Override
-    public void produce(String lotNumber, String details, Instant timeInstant,
+    public void produce(String finalProductName, String lotNumber, String details, Instant timeInstant,
             LinkedList<ProductionJob> productionJobs) {
-
+                
+        lotNumber=(++maxLotNumber)+"";
         for (ProductionJob job : productionJobs) {
 
             Double totalQty = job.getQtyUsed() + job.getQtyWaste();
@@ -76,6 +84,7 @@ public class ProductionService implements IProductionService {
                 IProductionBuilder builder = newProduction();
                 builder.details(details);
                 builder.lotNumber(lotNumber);
+                builder.finalProductName(finalProductName);
                 builder.productName(job.getProductName());
                 builder.stockId(stock.getId());
                 builder.purchaseId(stock.getPurchaseId());

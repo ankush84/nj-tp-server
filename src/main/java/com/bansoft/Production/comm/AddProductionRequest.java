@@ -29,7 +29,8 @@ public class AddProductionRequest extends Request {
         ArrayList<String> productNames = (ArrayList<String>) args.get("productNames");
         ArrayList<String> qtyUsedAry = (ArrayList<String>) args.get("qtyUsed");
         ArrayList<String> qtyWasteAry = (ArrayList<String>) args.get("qtyWaste");
-        String lotNumber = args.get("lotNumber").toString();
+        String finalProductName = args.get("finalProductName").toString();
+        //String lotNumber = args.get("lotNumber").toString();
         String details = args.get("details").toString();
         Instant timeInstant = Instant.now();
         LinkedList<ProductionJob> productionJobs = new LinkedList<ProductionJob>();
@@ -69,7 +70,7 @@ public class AddProductionRequest extends Request {
             }
         }
         //if we fail in production, we waste our stock, we should notify user
-        productionService.produce(lotNumber,details,timeInstant, productionJobs);
+        productionService.produce(finalProductName,null,details,timeInstant, productionJobs);
 
         ReplyMessage rm = new ReplyMessage();
         rm.returnCode = 0;

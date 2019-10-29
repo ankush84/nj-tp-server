@@ -53,6 +53,12 @@ public class ProductionBuilder implements IProductionBuilder {
         return this;
     }
 
+    @Override
+    public IProductionBuilder finalProductName(String finalProductName) {
+        this.ProductionModel.setFinalProductName(finalProductName);
+        return this;
+    }
+
     
     @Override
     public IProductionBuilder price(Double price) {

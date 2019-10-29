@@ -7,6 +7,7 @@ public interface IProduction{
     Long getStockId();
     Long getPurchaseId();
     String getProductName();
+	String getFinalProductName();
     Double getQtyUsed();
     Double getQtyWaste();
     Double getPrice();
@@ -18,6 +19,7 @@ public interface IProduction{
     void setStockId(Long stockId);
     void setPurchaseId(Long purchaseId);
     void setProductName(String productName);
+    void setFinalProductName(String finalProductName);
     void setQtyUsed(Double qtyUsed);
     void setQtyWaste(Double qtyWaste);
     void setPrice(Double price);
