@@ -8,6 +8,7 @@ public class ProductionStockModel implements IProductionStock {
     private String lotNumber;
     private String productName;
     private Double qty;
+    private Double cost;
     private Instant timestamp;
 
     public ProductionStockModel(){        
@@ -62,6 +63,14 @@ public class ProductionStockModel implements IProductionStock {
 	@Override
 	public void setProductName(String productName) {
 		this.productName = productName;
+	}
+
+	public Double getCost() {
+		return cost;
+	}
+
+	public void setCost(Double cost) {
+		this.cost = cost;
 	}
     
 }

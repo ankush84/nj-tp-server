@@ -29,6 +29,12 @@ public class ProductionStockBuilder implements IProductionStockBuilder{
     }
 
     @Override
+    public IProductionStockBuilder cost(Double cost) {
+        this.ProductionStockModel.setCost(cost);
+        return this;
+    }
+
+    @Override
     public IProductionStockBuilder timestamp(Instant dt) {
         this.ProductionStockModel.setTimestamp(dt);
         return this;

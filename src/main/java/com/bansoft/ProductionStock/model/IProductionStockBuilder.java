@@ -7,6 +7,7 @@ public interface IProductionStockBuilder{
     IProductionStockBuilder productName(String productName);    
     IProductionStockBuilder lotNumber(String lotNumber);    
     IProductionStockBuilder qty(Double qty);
+    IProductionStockBuilder cost(Double cost);
     IProductionStockBuilder timestamp(Instant dt);
     IProductionStock build();
 }

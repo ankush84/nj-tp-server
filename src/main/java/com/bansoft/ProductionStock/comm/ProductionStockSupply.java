@@ -5,5 +5,6 @@ public class ProductionStockSupply {
      public String lotNumber;
 	public String productName;
      public Double qty;     
+     public Double cost;     
      public long timestamp; //availablesince this time
 }

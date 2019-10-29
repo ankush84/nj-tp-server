@@ -80,6 +80,7 @@ public class ProductionService implements IProductionService {
                 
         lotNumber=(++maxLotNumber)+"";
         Double productionStockQty=0.0;
+        Double productionStockCost=0.0;
         for (ProductionJob job : productionJobs) {
 
             Double totalQty = job.getQtyUsed() + job.getQtyWaste();
@@ -102,11 +103,13 @@ public class ProductionService implements IProductionService {
                 builder.price(stock.getPrice());
                 builder.timestamp(timeInstant);
                 this.commitProduction(builder.build());
+
+                productionStockCost+=(((stock.getQty() * qtyUsedPct)+ (stock.getQty() * qtyWastePct))*stock.getPrice());
             }
         }
 
         IProductionStock stock = productionStockService.newProductionStock().productName(finalProductName)
-        .lotNumber(lotNumber).qty(productionStockQty).timestamp(Instant.now())
+        .lotNumber(lotNumber).qty(productionStockQty).cost(productionStockCost).timestamp(Instant.now())
                 .build();
             productionStockService.commitProductionStock(stock);
 

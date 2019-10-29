@@ -24,6 +24,9 @@ public class ProductionStockEntity {
     @Column        
     private Double qty;
 
+    @Column        
+    private Double cost;
+
     @Column    
     private long timestamp;
 
@@ -69,6 +72,14 @@ public class ProductionStockEntity {
 
     public void setProductName(String productName) {
         this.productName = productName;
+    }
+
+    public Double getCost() {
+        return cost;
+    }
+
+    public void setCost(Double cost) {
+        this.cost = cost;
     }
 
 }

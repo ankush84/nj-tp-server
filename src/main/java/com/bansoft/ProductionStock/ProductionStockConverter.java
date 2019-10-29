@@ -15,6 +15,7 @@ public class ProductionStockConverter {
         entity.setProductName(model.getProductName());
         entity.setLotNumber(model.getLotNumber());
         entity.setQty(model.getQty());
+        entity.setCost(model.getCost());
         entity.setTimestamp(model.getTimestamp().toEpochMilli());
         return entity;
     }
@@ -25,6 +26,7 @@ public class ProductionStockConverter {
         builder.productName(entity.getProductName());
         builder.lotNumber(entity.getLotNumber());
         builder.qty(entity.getQty());
+        builder.cost(entity.getCost());
         builder.timestamp(Instant.ofEpochMilli(entity.getTimestamp()));
 
         return builder.build();
@@ -36,6 +38,7 @@ public class ProductionStockConverter {
         supply.productName = model.getProductName();
         supply.lotNumber = model.getLotNumber();
         supply.qty = model.getQty();
+        supply.cost = model.getCost();
         supply.timestamp = model.getTimestamp().toEpochMilli();
         return supply;
     }

@@ -153,6 +153,7 @@ public class StockService implements IStockService {
         dao.save(entity);
 
         stock = StockConverter.fromStockEntityToModel(entity);
+        updateCache(stock);
         if (stock.getQty() > THRESHOLD) {
             this.StockTopic.supplyUpdate(StockConverter.fromStockModelToSupply(stock));
         } else {

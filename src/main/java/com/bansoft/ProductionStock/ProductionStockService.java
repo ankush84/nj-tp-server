@@ -137,14 +137,20 @@ public class ProductionStockService implements IProductionStockService {
     public void consumeProductionStock(IProductionStock ProductionStock) {
         ProductionStockEntity entity = dao.loadById(ProductionStock.getId());
         Double remainingQty = entity.getQty() - ProductionStock.getQty();
+        Double remainingCost=remainingQty *(entity.getCost()/entity.getQty()); 
+
         if (remainingQty > THRESHOLD) {
             entity.setQty(remainingQty);
+            entity.setCost(remainingCost);
         } else {
             entity.setQty(0.0);
+            entity.setCost(0.0);
         }
         dao.save(entity);
 
         ProductionStock = ProductionStockConverter.fromProductionStockEntityToModel(entity);
+        updateCache(ProductionStock);
+
         if (ProductionStock.getQty() > THRESHOLD) {
             this.ProductionStockTopic.supplyUpdate(ProductionStockConverter.fromProductionStockModelToSupply(ProductionStock));
         } else {
