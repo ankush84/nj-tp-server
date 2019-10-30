@@ -121,7 +121,7 @@
 					</descriptorRefs>
 					<archive>
 						<manifest>
-							<mainClass>com.iontrading.sparkutil.Main</mainClass>
+							<mainClass>com.bansoft.Main</mainClass>
 						</manifest>
 						<manifestEntries>
 							<ComponentVersion>${project.version}</ComponentVersion>
@@ -139,6 +139,25 @@
 					</execution>
 				</executions>
 			</plugin>
+
+			<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <appendAssemblyId>false</appendAssemblyId>
+                            <descriptors>
+                                <descriptor>src/main/assembly/zip.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
     </plugins>
   </build>
 

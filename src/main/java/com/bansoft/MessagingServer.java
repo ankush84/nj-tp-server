@@ -32,7 +32,7 @@ public class MessagingServer {
         // ctx.setHandler(resHandler);
 
 
-        final String webAppPath =Paths.get(System.getProperty("user.dir"),"src","main","resources","webapp").toAbsolutePath().toString();
+        final String webAppPath =Paths.get(System.getProperty("user.dir"),"webapp").toAbsolutePath().toString();
         final ResourceHandler webAppResHandler = new ResourceHandler();
         webAppResHandler.setResourceBase(webAppPath);
         final ContextHandler webAppCtx = new ContextHandler("/client");

@@ -1,6 +1,8 @@
 //https://itnext.io/writing-a-web-socket-server-with-embedded-jetty-46fe9ab1c435
 package com.bansoft.comm;
 
+import java.time.Instant;
+
 import com.bansoft.comm.payload.Data;
 import com.bansoft.comm.payload.RequestMessage;
 import com.bansoft.comm.payload.SubscriptionMessage;
@@ -22,7 +24,7 @@ public class MessagingAdapter extends WebSocketAdapter {
     @Override
     public void onWebSocketText(String text) {
         super.onWebSocketText(text);
-
+        System.out.println(Instant.now().toString()+ "- remoteIn {" + text + "}");
         try {
             Data data = gson.fromJson(text, Data.class);
             if (data != null) {
@@ -80,6 +82,8 @@ public class MessagingAdapter extends WebSocketAdapter {
     }
 
     public void sendStringToRemote(String text) {
+        System.out.println(Instant.now().toString()+ "- remoteOut {" + text + "}");
+
         if (getSession() != null && getSession().isOpen()) {
             try {
 
@@ -87,8 +91,10 @@ public class MessagingAdapter extends WebSocketAdapter {
 
             } catch (Exception ex) {
                 // put to offline message
-                System.out.println("User is offline");
+                System.out.println("Ex while sending remoteOut: " + ex.toString());
             }
+        }else{
+            System.out.println("remoteOut not send userseems offline");
         }
     }
 

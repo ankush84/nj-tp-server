@@ -1,0 +1,1 @@
+"%JAVA_HOME%\bin\java.exe" -cp "./*;./lib/*;C:/Program Files (x86)/MySQL/Connector J 8.0/*" com.bansoft.Main >>stdout.log
