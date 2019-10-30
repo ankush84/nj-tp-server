@@ -14,6 +14,8 @@ public class Data {
     public static final int OPERATION_SUPPLY = 200;        
     public static final int OPERATION_REQUEST = 300;        
     public static final int OPERATION_REPLY = 400;        
+    public static final int OPERATION_PING = 500;        
+    public static final int OPERATION_PONG = 501;        
     
     public int protocolversion = VERSION;
     public int operation;
